@@ -1,0 +1,14 @@
+streamlit
+pandas
+numpy
+plotly
+openpyxl
+python-dotenv
+scikit-learn
+SQLAlchemy
+openai
+pytest
+fastapi
+uvicorn
+python-multipart
+requests
