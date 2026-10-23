@@ -29,6 +29,15 @@ With this assistant, you upload any CSV or Excel file, ask questions naturally (
 3. **Automated AI insights** providing executive summaries and takeaways.
 4. **Predictive machine learning** with instant regression and trend models.
 
+### 🌟 Project Highlights & Core Capabilities
+- **End-to-End Analytics Pipeline:** AI-powered analytics application to analyze CSV and Excel datasets using natural-language queries.
+- **Data Engineering & Cleaning:** Automated data cleaning, preprocessing, and statistical analysis using Python and Pandas.
+- **Natural Language to SQL:** Integrated LLMs (Gemini / OpenAI) to convert user questions into optimized SQL queries for automated analysis.
+- **Enterprise-Grade Security:** SQL query validation and strict read-only execution to eliminate SQL injection and protect databases.
+- **Dynamic Visualizations:** Interactive charts and visualizations using Plotly and Recharts to easily surface trends and patterns.
+- **Actionable AI Insights:** Automated narrative insights and takeaways derived directly from query results.
+- **Dual Dashboards:** Interactive Streamlit and React dashboards featuring dataset exploration, SQL Studio, predictive ML, and downloadable reports.
+
 ---
 
 ## ✨ Key Features
