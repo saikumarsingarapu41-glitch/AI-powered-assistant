@@ -74,7 +74,7 @@ AI_Data_Analytics_Assistant/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/AI_Data_Analytics_Assistant.git
+   git clone https://github.com/saikumarsingarapu41-glitch/AI_Data_Analytics_Assistant.git
    cd AI_Data_Analytics_Assistant
    ```
 
