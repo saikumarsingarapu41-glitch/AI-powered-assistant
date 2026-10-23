@@ -1,142 +1,230 @@
-# AI-Powered Natural Language Data Analytics Assistant
+<div align="center">
 
-## Overview
-The **AI-Powered Natural Language Data Analytics Assistant** is a comprehensive, interactive application that empowers users to analyze complex datasets simply by asking questions in plain English. No SQL or programming knowledge is required.
+# 📊 AI-Powered Data Analytics Assistant
 
-## Problem Statement
-Business analysts, students, and managers often struggle to quickly extract insights from tabular data (CSV/Excel) because querying requires SQL or Python Pandas proficiency. This creates a bottleneck in decision-making and data exploration.
+**Transform Natural Language into Actionable Business Intelligence & Visual Analytics**
 
-## Proposed Solution
-An AI-driven dashboard that ingests datasets, cleans them, stores them in a lightweight local SQLite database, and uses a Large Language Model (LLM) to translate user questions into safe, read-only SQL queries. It automatically executes these queries, renders interactive Plotly visualizations, and provides natural language insights.
+[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![React](https://img.shields.io/badge/Frontend-React%20%7C%20Vite-61DAFB.svg?logo=react&logoColor=black)](https://reactjs.org/)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Plotly](https://img.shields.io/badge/Charts-Plotly-3F4F75.svg?logo=plotly&logoColor=white)](https://plotly.com/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-## Features
-- **File Upload:** Support for CSV and Excel files.
-- **Auto Data Cleaning:** Missing value imputation, duplicate removal, and data type detection.
-- **Natural Language Querying:** Ask questions like *"Which product generated the highest revenue?"* and get instant answers.
-- **Secure SQL Execution:** Stringent SQL validation ensuring only read-only `SELECT` statements are executed.
-- **Auto Visualization:** Dynamic Plotly charts generated based on query results (Bar, Line, Scatter, Pie).
-- **AI Insights:** Automated, easy-to-understand explanations of the returned data.
-- **Machine Learning Prediction:** Optional basic Linear Regression model training on uploaded data.
-- **Report Generation:** Downloadable history of analysis sessions.
-- **Dual Interface:** Choose between a Streamlit app or a modern FastAPI + React dashboard.
+*Analyze complex tabular datasets (CSV / Excel) simply by asking questions in plain English — no SQL or Python programming required.*
 
-## Technologies Used
-- **Backend:** Python 3.11+, FastAPI / Streamlit
-- **Frontend:** Streamlit & React (Vite, Tailwind/Modern CSS)
-- **Data Processing:** Pandas, NumPy
-- **Database:** SQLite3
-- **AI / LLM:** Google Gemini / OpenAI API
-- **Visualization:** Plotly, Recharts
-- **Machine Learning:** Scikit-learn
+[Key Features](#-key-features) • [System Architecture](#-system-architecture) • [Quick Start](#-quick-start) • [Dual Interface](#-dual-interface-options) • [API Reference](#-api-endpoints)
 
-## System Architecture
+---
+
+</div>
+
+## 💡 Overview
+
+The **AI-Powered Data Analytics Assistant** bridges the gap between raw data and decision-making. Business analysts, students, researchers, and executives often face bottlenecks waiting for custom SQL queries or Python scripts. 
+
+With this assistant, you upload any CSV or Excel file, ask questions naturally (e.g., *"What were our top 5 selling products last quarter?"*), and receive:
+1. **Accurate SQL execution** on an in-memory or SQLite database.
+2. **Interactive charts** generated automatically using Plotly and Recharts.
+3. **Automated AI insights** providing executive summaries and takeaways.
+4. **Predictive machine learning** with instant regression and trend models.
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+| :--- | :--- |
+| 🗣️ **Plain-English Querying** | Natural Language to SQL translation powered by modern LLMs (Google Gemini & OpenAI). |
+| 🛡️ **Safe & Secure SQL** | Read-only verification engine that rejects mutations (`DROP`, `DELETE`, `UPDATE`, `INSERT`) and multi-statement injection attacks. |
+| 🧹 **Automated Data Cleaning** | Automatic missing-value imputation, duplicate removal, type inference, and column standardization. |
+| 📈 **Dynamic Visualizations** | Smart chart selector automatically picks the best chart type (Bar, Line, Scatter, Area, Pie) based on query semantics. |
+| 🔮 **Predictive Analytics** | Built-in machine learning models (Linear Regression, Scikit-Learn) for quick trend forecasting. |
+| ⚡ **Dual Dashboard Experience** | Choose between a lightweight **Streamlit UI** or a high-performance **FastAPI + React (Vite)** full-stack dashboard. |
+| 📄 **Executive Reports** | Downloadable query logs and analysis summaries for reporting and team sharing. |
+
+---
+
+## 🏗️ System Architecture
+
 ```mermaid
 graph TD
-    User --> Frontend[Streamlit / React UI]
-    Frontend --> Pandas[Pandas Cleaning]
-    Pandas --> SQLite[(SQLite DB)]
-    Frontend --> LLM_SQL[LLM: Text to SQL]
-    LLM_SQL --> SQL_Val[SQL Validation]
-    SQL_Val --> SQLite
-    SQLite --> Result_DF[Result Dataframe]
-    Result_DF --> Plotly[Plotly / Interactive Charts]
-    Result_DF --> LLM_Insight[LLM: Data to Insight]
-    LLM_Insight --> User
-    Plotly --> User
+    User([User Query / Prompt]) --> UI[Dual Frontend: React Dashboard / Streamlit]
+    DataFile[(Uploaded CSV / Excel)] --> Cleaning[Pandas Auto-Cleaning Engine]
+    Cleaning --> DB[(Lightweight SQLite Engine)]
+    
+    UI --> LLM_SQL[AI Engine: Text to SQL Translation]
+    LLM_SQL --> Validator{SQL Security Validator}
+    
+    Validator -- "Unsafe Query" --> ErrorMsg[Security Rejection Block]
+    Validator -- "Safe SELECT" --> Executor[SQLite Query Runner]
+    
+    Executor --> ResultDF[Result Dataset]
+    ResultDF --> Visualizer[Plotly & Recharts Viz Engine]
+    ResultDF --> LLM_Insight[AI Insight Summarizer]
+    
+    Visualizer --> OutputDashboard[Interactive Data Dashboard]
+    LLM_Insight --> OutputDashboard
+    OutputDashboard --> User
 ```
 
-## Project Structure
-```
-.
-├── app.py                     # Streamlit application
+---
+
+## 📁 Repository Structure
+
+```plaintext
+AI-powered-assistant/
+├── app.py                     # Streamlit application dashboard
 ├── api.py                     # FastAPI REST API backend
-├── requirements.txt           # Python dependencies
-├── .env.example               # Environment variables template
-├── .gitignore                 # Git ignore rules
+├── demo_script.py             # CLI demonstration and test script
+├── requirements.txt           # Python library dependencies
+├── .env.example               # Template for API keys
+├── .gitignore                 # Files excluded from git tracking
 ├── README.md                  # Project documentation
-├── start.bat / start.ps1      # Quick startup scripts
-├── run_app.bat                # Launch Streamlit app
-├── run_api.bat                # Launch FastAPI server
-├── run_react_frontend.bat     # Launch Vite React frontend
-├── data/
-│   ├── sales_data.csv
-│   └── census_data.csv
-├── modules/
-│   ├── __init__.py
-│   ├── data_cleaning.py
-│   ├── database.py
-│   ├── llm.py
-│   ├── sql_generator.py
-│   ├── visualization.py
-│   ├── insights.py
-│   └── prediction.py
-├── frontend/                  # React + Vite dashboard
-└── tests/
-    ├── __init__.py
-    ├── test_api.py
-    ├── test_data_cleaning.py
-    ├── test_database.py
-    ├── test_insights.py
-    ├── test_prediction.py
-    ├── test_sql_generator.py
-    └── test_sql_validation.py
+├── start.bat / start.ps1      # 1-click startup automation scripts
+├── run_app.bat                # Shortcut to launch Streamlit app
+├── run_api.bat                # Shortcut to launch FastAPI backend
+├── run_react_frontend.bat     # Shortcut to launch React Vite app
+├── data/                      # Sample datasets for instant testing
+│   ├── sales_data.csv         # Retail sales sample dataset
+│   └── census_data.csv        # Demographic census dataset
+├── modules/                   # Core backend processing modules
+│   ├── data_cleaning.py       # Data sanitization & type inference
+│   ├── database.py            # SQLite schema management & execution
+│   ├── llm.py                 # LLM provider interface (Gemini / OpenAI)
+│   ├── sql_generator.py       # Prompt engineering & Text-to-SQL logic
+│   ├── visualization.py       # Chart generation utilities
+│   ├── insights.py            # Automatic statistical commentary
+│   └── prediction.py          # Machine learning regression models
+├── frontend/                  # React modern dashboard
+│   ├── package.json           # Frontend dependencies
+│   ├── vite.config.js         # Vite bundling configuration
+│   └── src/                   # React components & visual design system
+└── tests/                     # Automated unit and integration test suite
+    ├── test_api.py            # FastAPI endpoint tests
+    ├── test_data_cleaning.py  # Cleaning pipeline tests
+    ├── test_database.py       # SQLite execution tests
+    ├── test_insights.py       # Insight generation tests
+    ├── test_prediction.py     # ML prediction tests
+    ├── test_sql_generator.py  # Prompt & query generation tests
+    └── test_sql_validation.py # SQL security guard tests
 ```
 
-## Installation & Setup
+---
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/saikumarsingarapu41-glitch/AI_Data_Analytics_Assistant.git
-   cd AI_Data_Analytics_Assistant
-   ```
+## 🚀 Quick Start
 
-2. **Create and activate a virtual environment:**
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On Mac/Linux:
-   source venv/bin/activate
-   ```
+### 1. Clone the Repository
+```bash
+git clone https://github.com/saikumarsingarapu41-glitch/AI-powered-assistant.git
+cd AI-powered-assistant
+```
 
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 2. Set Up Python Virtual Environment
+```bash
+python -m venv venv
 
-4. **Environment Setup:**
-   - Copy `.env.example` to a new file named `.env`.
-   - Configure your Gemini / OpenAI API key in `.env`:
-     ```env
-     GEMINI_API_KEY=your_actual_api_key_here
-     ```
+# Windows:
+venv\Scripts\activate
 
-## Running the Application
+# macOS / Linux:
+source venv/bin/activate
+```
 
-### Option A: Streamlit UI
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure Environment Variables
+Copy `.env.example` to `.env` and insert your API key:
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+# Or if using OpenAI:
+LLM_API_KEY=your_openai_api_key_here
+LLM_MODEL=gpt-4o-mini
+```
+
+---
+
+## 🖥️ Dual Interface Options
+
+### Option 1: Streamlit Dashboard (Zero Frontend Config)
+Fast, interactive dashboard ideal for quick data exploration:
 ```bash
 streamlit run app.py
 ```
-Or run:
-```bat
-run_app.bat
-```
-Open `http://localhost:8501` in your browser.
+*Or double click:* `run_app.bat`  
+Default URL: `http://localhost:8501`
 
-### Option B: FastAPI Backend + React Frontend
-1. Start FastAPI:
+### Option 2: Full-Stack React + FastAPI Dashboard
+A sleek, modern production-grade experience:
+1. **Start the FastAPI backend:**
    ```bash
    python api.py
    ```
-2. In another terminal, start the React frontend:
+2. **Start the React frontend:**
    ```bash
    cd frontend
    npm install
    npm run dev
    ```
-Or simply double-click `start.bat`.
+*Or simply run the all-in-one script:* `start.bat` / `start.ps1`  
+Default URLs:
+- React Frontend: `http://localhost:5173`
+- FastAPI Swagger Docs: `http://localhost:8000/docs`
 
-## Security
-- **No Secrets Committed:** Kept safe via `.gitignore` and `.env`.
-- **SQL Sanitization:** The `sql_generator.py` validates tokens, rejects multiple queries, and strictly blocks keywords like `DROP`, `DELETE`, `UPDATE`, `INSERT`, etc.
-- **Read-Only:** LLM-generated operations cannot mutate the dataset.
+---
+
+## 💬 Example Natural Language Queries
+
+Try these sample queries using the included `data/sales_data.csv`:
+- *"Which product generated the highest overall revenue?"*
+- *"Show total profit breakdown grouped by region."*
+- *"What is the monthly sales trend across categories?"*
+- *"List the top 5 customers ordered by purchase volume."*
+- *"Are there correlations between discounts and profit margins?"*
+
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Healthcheck and server status |
+| `POST` | `/api/upload` | Upload CSV/Excel and initialize SQLite table |
+| `POST` | `/api/query` | Translate natural language to SQL and execute |
+| `POST` | `/api/predict` | Train a predictive regression model |
+| `GET` | `/api/history` | Retrieve query and insight history |
+
+---
+
+## 🔒 Security & Data Privacy
+
+- **Read-Only Enforced**: Only queries starting with `SELECT` pass validation.
+- **SQL Injection Prevention**: Multiple query separation (`;`), comments (`--`), and DDL/DML statements (`DROP`, `ALTER`, `DELETE`, `UPDATE`) are strictly blocked.
+- **Local Storage**: Data stays on your local SQLite instance — only table schemas and analytical prompts are processed by the LLM.
+- **Environment Isolation**: Secret keys are never hardcoded and are filtered by `.gitignore`.
+
+---
+
+## 🧪 Testing
+
+Run the automated test suite with `pytest`:
+```bash
+pytest -v
+```
+
+---
+
+## 👤 Author
+
+**Sai Kumar Singarapu**  
+- GitHub: [@saikumarsingarapu41-glitch](https://github.com/saikumarsingarapu41-glitch)
+- Project: [AI-powered-assistant](https://github.com/saikumarsingarapu41-glitch/AI-powered-assistant)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
